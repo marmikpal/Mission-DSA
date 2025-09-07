@@ -1,0 +1,57 @@
+class MyCircularQueue {
+
+    int circularQueue[];
+    int rear;
+    int front;
+    int max;
+    public MyCircularQueue(int k)
+     {
+        circularQueue = new int[k];
+        rear = -1;
+        front = -1;
+        max = k;
+    }
+    
+    public boolean enQueue(int value) {
+        if(!this.isFull())
+        {
+            
+            if(isEmpty())rear = front = 0;
+            else rear = (rear + 1) % max;
+            circularQueue[rear] = value;
+            
+
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean deQueue() {
+        if(!isEmpty())
+        {
+            if(front == rear) {
+                front = rear = -1;
+                return true;
+            }
+            front = (front + 1 ) % max;
+            return true;
+        }
+        return false;
+    }
+    
+    public int Front() {
+        return (!isEmpty())?circularQueue[front]: -1;
+    }
+    
+    public int Rear() {
+        return (!isEmpty())? circularQueue[rear]:-1;
+    }
+    
+    public boolean isEmpty() {
+        return (rear == -1);
+    }
+    
+    public boolean isFull() {
+        return (front == ((rear + 1) % max));
+    }
+}
